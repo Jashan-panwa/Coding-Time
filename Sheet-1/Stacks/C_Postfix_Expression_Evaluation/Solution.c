@@ -1,38 +1,92 @@
-Implement a program to evaluate a postfix expression.
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+#include <stdbool.h>
 
-Input Format
+struct Stack {
+    int *arr;
+    int size;
+    int capacity;
+};
 
-The first input will be a single integer N denoting the number of test cases to take. After this there will be exactly N lines, each line a valid postfix string. The string will be a valid postfix expression consisting of only integers and binary operators (+, -, *, / and ?).
+bool isStackEmpty(struct Stack* s) {
+    if (s->size == 0) return true;
+    return false; 
+}
 
-Every integer and operator will be compulsorily separated by a SPACE. The symbol ‘?’ denotes the end of expression.
+void pushToStack(struct Stack* s, int x) {
+    if (s->size >= s->capacity) {
+        s->capacity *= 2;
+        int *temp = malloc(s->capacity * sizeof(int));
+        for (int i = 0; i < s->size; i++) {
+            temp[i] = s->arr[i];
+        }
+        s->arr = temp;
+    }
+    s->arr[s->size++] = x;
+}
 
-Constraints
+int popFromStack(struct Stack* s) {
+    if (isStackEmpty(s)) return -1;
+    return s->arr[s->size--];
+}
 
-NA
+void initializeStack(struct Stack* s) {
+    s->size = 0;
+    s->capacity = 1;
+    s->arr = malloc(sizeof(int));
+}
 
-Output Format
+void emptyStack(struct Stack* s) {
+    s->size = 0;
+}
 
-Exactly N lines, each line denoting the output of the expression. In case the output is in fractions, please print only the integer part of the output.
+int peekStack(struct Stack* s) {
+    return s->arr[s->size - 1];
+}
 
-Sample Input 0
+int performOperation(int num1, int num2, char operator) {
+    if (operator == '+') return num1 + num2;
+    else if (operator == '-') return num2 - num1;
+    else if (operator == '*') return num1 * num2;
+    return num2 / num1;
+}
 
-1
-31 4 50 + * ? 
-Sample Output 0
+int main() {
+    int test_cases;
+    scanf("%d", &test_cases);
+    getchar();
 
-1674
-Sample Input 1
+    while (test_cases != 0) {
+        char expression[10000];
+        fgets(expression, sizeof(expression), stdin);
+        int len = strlen(expression);
+        struct Stack* stack = malloc(sizeof(struct Stack));
+        initializeStack(stack);
+        char temp[10000];
 
-5
-12 23 + 14 - ?
-2 43 12 * + 12 + ? 
-12 3 + 12 3 + * 12 3 + / ? 
-32 34 12 * + 1 2 + * 1 1 + / 23 21 - * ?
-12 10 * 12 / ?
-Sample Output 1
-
-21
-530
-15
-1320
-10
+        for (int i = 0; i < len; i++) {
+            if (expression[i] == '?') break;
+            if (expression[i] == '+' || expression[i] == '-' || expression[i] == '*' || expression[i] == '/') {
+                int num1 = peekStack(stack);
+                popFromStack(stack);
+                int num2 = peekStack(stack);
+                popFromStack(stack);
+                pushToStack(stack, performOperation(num1, num2, expression[i]));
+                i = i + 1;
+            } else {
+                int j = i;
+                while (j < len - 1 && expression[j] != ' ') j++;
+                temp[j - i] = '\0';
+                for (int p = i; p < j; p++) temp[p - i] = expression[p];
+                int number = atoi(temp);
+                pushToStack(stack, number);
+                i = j;
+            }
+        }
+        printf("%d\n", peekStack(stack));
+        test_cases--;
+    }
+    return 0;
+}
