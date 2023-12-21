@@ -69,6 +69,7 @@ int sign(int x) {
     return sign_bit | is_zero;      // Combine sign and zero results
 }
 
+
 ------------|
 Q4. GetByte |
 ------------|
@@ -87,8 +88,6 @@ Solution:
 int getByte(int x, int n) {
     return (x >> (n << 3)) & 0xFF;
 }
-
-
 
 
 -----------------|
@@ -117,7 +116,6 @@ int logicalShift(int x, int n) {
 ----------------|
 Q6. Conditional |
 ----------------|
-
 /*
  conditional - same as x ? y : z
  example conditional (2, 4, 5) = 4
@@ -138,8 +136,6 @@ int conditional(int x, int y, int z) {
 ---------|
 Q7. Bang |
 ---------|
-Q7. Bang
-
 /* bang - Compute !x without using !
   Examples: bang(3)=0, bang(0)=1
   Legal ops: ~ & ^ | + << >>
@@ -163,7 +159,6 @@ int bang(int x) {
 -----------|
 Q8. Invert |
 -----------|
-
 /* 
    Return x with the n bits that begin at position p inverted (i.e. turn 0 /* into 1 and vice versa)
    and the rest left unchanged. Consider the indices of x to begin with the /* lower -order bit   numbered
