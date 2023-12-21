@@ -1,0 +1,177 @@
+                                                         **Bits and Bytes**
+Pre-requisites: 
+Knowledge of
+  bitwise operators &, |, >>, <<, ^, ~
+  Data representation of signed and unsigned integers
+
+-----------|
+Q1. BitAnd |
+-----------|
+
+/* 
+   bitAnd - x & y using only ~ and |
+   Example bitAnd(6, 5) = 4
+   Legal ops:  ~ |  
+   Max ops: 8
+*/
+/*
+int bitAnd (int x, int y) {
+     return 0;
+}
+*/
+Solution:
+int bitAnd(int x, int y) {
+    return ~(~x | ~y);
+}
+
+
+-------------|
+Q2.   BitXor |
+-------------|
+
+/*
+   bitXor - x ^ y using only ~ and &
+   Example bitXor(4, 5) = 1
+   Legal ops:  ~ &  
+   Max ops: 14
+*/
+/*
+int bitXor (int x, int y) {
+     return 0;
+}
+*/
+Solution:
+int bitXor(int x, int y) {
+    int a = x & (~y);   // Calculate the bits that are set in x but not in y
+    int b = (~x) & y;   // Calculate the bits that are set in y but not in x
+    int result = (~a) & (~b);  // Calculate the final result by excluding the common bits
+    return result;
+}
+
+
+
+Q3. Sign
+
+/*
+* sign - return 1 if positive, 0 if zero, and -1 if negative
+* Examples: sign(130) = 1, sign(-23) = -1
+* Legal ops: ! ~ & ^ | + << >>
+* Max ops : 10
+*/
+int sign(int x) {
+   //TODO
+    return 0;
+}
+int sign(int x) {
+    int sign_bit = x >> 31;         // Extract the sign bit (0 for non-negative, -1 for negative)
+    int is_zero = !x;               // Check if x is zero
+    return sign_bit | is_zero;      // Combine sign and zero results
+}
+
+
+Q4. GetByte
+
+/*
+* getByte - extract byte n from word x
+* Examples: getByte(0x12345678, 1)  = 0x56
+*Legal ops: ! ~ & ^| + << >>
+Max ops: 6
+*/
+int getByte(int x, int n) {
+    return 0;
+}
+int getByte(int x, int n) {
+    return (x >> (n << 3)) & 0xFF;
+}
+
+
+
+
+
+Q5. LogicalShift
+
+/* logicalShift - shift x to the right by n, using a logical shift
+*  can assume that 0 <=n<=31
+* examples: logicalShift(0x87654321, 4) = 0x8765432
+*  Legal ops:  ~ & ^ | + << >>
+*Max ops: 20
+*/
+int logicalShift(int x, int n) {
+    return 0;
+}
+int logicalShift(int x, int n) {
+    int shift_amount = 32 + (~n + 1); // Calculate the shift amount (32 - n)
+    int mask = ((1 << shift_amount) + ~0); // Create a mask with 1s in the higher bits
+
+    return (x >> n) & mask;
+}
+
+
+
+Q6. Conditional
+
+/*
+* conditional - same as x ? y : z
+* example conditional (2, 4, 5) = 4
+* ! ~ & ^ | + << >>
+* Max ops: 16
+*/
+int conditional(int x, int y, int z) {
+    return 0;
+}
+int conditional(int x, int y, int z) {
+    int mask = ((!x) + ~0);  // If x is zero, mask will be all 1s; otherwise, it will be all 0s
+    return (mask & y) | (~mask & z);  // Use the mask to select y or z
+}
+
+
+
+
+
+
+Q7. Bang
+
+/* bang - Compute !x without using !
+*  Examples: bang(3)=0, bang(0)=1
+*  Legal ops: ~ & ^ | + << >>
+*  Max ops: 12
+*/ 
+int bang(int x) {
+    return 0;
+}
+int bang(int x) {
+    int minus_x = ~x + 1; // Calculate the two's complement of x
+
+    // If x is 0, then both x and -x will be 0. Otherwise, they will have opposite sign bits.
+    // Extract the sign bits and OR them together. If both are 0, it will return 1; otherwise, 0.
+    int sign_or = ((x | minus_x) >> 31) & 1;
+
+    return sign_or;
+}
+
+
+
+Q8. Invert
+
+/* 
+/* Return x with the n bits that begin at position p inverted (i.e. turn 0 /* into 1 and vice versa)
+/* and the rest left unchanged. Consider the indices of x to begin with the /* lower -order bit   numbered
+/* Legal ops: ~ & ^ | << >>
+/* as zero
+*/
+int invert (int x, int p, int n) {
+    //TODO
+    return 0;
+}
+int invert(int x, int p, int n) {
+    int mask = ((1 << n) - 1) << p;  // Create a mask with 1s in the bits to be inverted
+    return x ^ mask;  // XOR with the mask to invert the selected bits
+}
+
+
+
+
+Q9. Base64 Encoding
+Please solve this hackerrank problem
+Submission
+This assignment has to be strictly submitted in C Language. Problems 1-8 can be implemented in one file and problem 9 in a separate file. As always, please share github links to your solutions.
