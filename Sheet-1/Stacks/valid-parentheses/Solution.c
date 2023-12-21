@@ -1,9 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <string.h>
-
-// Definition of a stack structure
 struct Stack {
     char *arr; // Change int to char to store characters
     int size;
@@ -45,17 +39,23 @@ char top(struct Stack* s) {
     return s->arr[s->size - 1];
 }
 
-// Function to validate the string containing parentheses
+// Function to validate the string containing parentheses, square brackets, and curly braces
 bool isValid(char* s) {
     struct Stack* st = createStack();
 
     int n = strlen(s);
     for (int i = 0; i < n; i++) {
         char c = s[i];
-        if (c == '(') {
+        if (c == '(' || c == '[' || c == '{') {
             push(st, c);
-        } else if (c == ')') {
-            if (empty(st) || top(st) != '(') {
+        } else if (c == ')' || c == ']' || c == '}') {
+            if (empty(st)) {
+                free(st->arr);
+                free(st);
+                return false;
+            }
+            char t = top(st);
+            if ((c == ')' && t != '(') || (c == ']' && t != '[') || (c == '}' && t != '{')) {
                 free(st->arr);
                 free(st);
                 return false;
@@ -69,7 +69,6 @@ bool isValid(char* s) {
     free(st);
     return isValidString;
 }
-
 int main() {
     char input[100];
     printf("Enter a continuous string without spaces or newlines: ");
