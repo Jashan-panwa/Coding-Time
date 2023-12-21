@@ -1,3 +1,7 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <string.h>
 struct Stack {
     char *arr; // Change int to char to store characters
     int size;
