@@ -1,0 +1,48 @@
+XOR Challenge
+You are given an Integer C such that the XOR of two integers (A,B) is C. In short A ⊕ B = C (⊕ denotes the bitwise XOR operation)
+
+Out of all possible pairs of A and B, you have to find such two integers such that their product is maximum. 
+
+Let's define L(A) = the length of A in its binary representation. Then, L(A) <= L(C) and L(B) <= L(C).
+
+Input format 
+
+Single Integer representing C (0⩽C⩽105).
+
+Output format 
+
+Ouptut the maximum product we can achieve under the given conditions.
+
+Sample input
+
+
+13
+Sample output
+
+70
+Explanation
+The binary representation of 13 is "1101".
+
+We can use A=10 ("1010" in binary) and B=7 ("0111" in binary). This gives us the product 70. No other valid pair (A,B) can give us a larger product.
+
+The following test cases are the actual test cases of this question that may be used to evaluate your submission.
+Sample input 1
+
+
+13
+Sample output 1
+
+70
+Sample input 2
+
+
+9859
+Sample output 2
+
+120538756
+Note:
+Your code must be able to print the sample output from the provided sample input. However, your code is run against multiple hidden test cases. Therefore, your code must pass these hidden test cases to solve the problem statement.
+Limits
+Time Limit: 1.0 sec(s) for each input file
+Memory Limit: 256 MB
+Source Limit: 1024 KB
