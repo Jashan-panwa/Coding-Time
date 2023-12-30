@@ -1,0 +1,35 @@
+Given an array of integers A, every element appears twice except for one. Find that single one.
+
+NOTE: Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory?
+
+Problem Constraints
+
+1 <= |A| <= 2000000
+
+0 <= A[i] <= INTMAX
+
+Input Format
+
+First line contains number of integers in Array - N
+Next N lines contains entries in the array
+Sample input
+
+
+512231
+Sample output
+
+3
+The following test case is one of the actual test cases of this question that may be used to evaluate your submission.
+Sample input 1
+
+
+3122
+Sample output 1
+
+1
+Note:
+Your code must be able to print the sample output from the provided sample input. However, your code is run against multiple hidden test cases. Therefore, your code must pass these hidden test cases to solve the problem statement.
+Limits
+Time Limit: 5.0 sec(s) for each input file
+Memory Limit: 256 MB
+Source Limit: 1024 KB
